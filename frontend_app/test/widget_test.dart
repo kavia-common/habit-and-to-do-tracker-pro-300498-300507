@@ -3,16 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend_app/main.dart';
 
 void main() {
-  testWidgets('App generation message displayed', (WidgetTester tester) async {
+  testWidgets('Shows app and default nav', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
-
-    expect(find.text('frontend_app App is being generated...'), findsOneWidget);
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
-
-  testWidgets('App bar has correct title', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-
-    expect(find.text('frontend_app'), findsOneWidget);
+    // Expect to find the initial AppBar title "Tasks"
+    await tester.pumpAndSettle();
+    expect(find.text('Tasks'), findsOneWidget);
+    // FAB should exist on Tasks tab
+    expect(find.byType(FloatingActionButton), findsOneWidget);
   });
 }
